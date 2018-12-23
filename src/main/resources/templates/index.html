@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>InstaTeam</title>
+        <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" th:href="@{/normalize.css}">
+        <link rel="stylesheet" th:href="@{/site.css}">
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <div class="site-header">
+                    <a class="logo" href="index.html">InstaTeam</a>
+                    <a class="new-project button icon-left" th:href="@{/projects/create}"><i class="material-icons">add</i> New Project</a>
+                </div>
+            </div>
+        </header>
+        <nav>
+            <ul>
+                <li class="selected"><a href="index.html">Projects</a></li>
+                <li><a href="../../../../../../Downloads/instateam%20(2)/Code/collaborators.html">Collaborators</a></li>
+                <li><a href="roles.html">Roles</a></li>
+            </ul>
+        </nav>
+        <section>
+            <div class="container wrapper">
+                <div class="project-list">
+                    <div th:each="project : ${projects}" class="project">
+                        <h2><a th:href="@{${project.id}}" th:text="${project.name}">Website Project</a></h2>
+                        <p th:text="${project.desc}">Design and build a custom website</p>
+                        <span class="tag active" th:text="${project.status}">Active</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
