@@ -98,6 +98,11 @@ nav ul li.selected a {
 	float: left;
 	position: relative;
 }
+
+.button-role {
+
+}
+
 .button.button-secondary {
 	background: transparent;
 	border-color: #e1e0e0;
@@ -349,7 +354,7 @@ form textarea:hover {
 	border-color: #747372;
 }
 input[type=submit] {
-	margin-right: 5px;
+    margin-right: 5px;
 }
 form select {
 	display: block;

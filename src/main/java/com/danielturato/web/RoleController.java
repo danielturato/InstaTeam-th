@@ -22,28 +22,23 @@ public class RoleController {
 
     @RequestMapping("/roles")
     public String viewAllRoles(ModelMap model) {
-        Role r = new Role();
-        r.setName("test");
-        roleService.save(r);
         List<Role> roles = roleService.findAll();
         model.put("roles", roles);
 
-        if (!model.containsAttribute("role")) {
-            model.put("role", new Role());
-        }
+        model.put("role", new Role());
 
         return "roles";
     }
 
 
-//    @RequestMapping(value = "/roles", method = RequestMethod.POST)
-//    public String addRole(Role role) {
-//
-//        roleService.save(role);
-//
-//
-//        return "redirect:/projects";
-//    }
+    @RequestMapping(value = "/roles", method = RequestMethod.POST)
+    public String addRole(@Valid Role role) {
+
+        roleService.save(role);
+
+
+        return "redirect:/roles";
+    }
 
 
 

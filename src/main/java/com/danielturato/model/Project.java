@@ -21,10 +21,10 @@ public class Project {
     @NotNull
     private String status;
 
-    @ManyToMany(mappedBy = "name")
+    @ManyToMany
     private List<Role> rolesNeeded = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "role")
+    @ManyToMany
     private List<Collaborator> collaborators = new ArrayList<>();
 
     public Project() {}

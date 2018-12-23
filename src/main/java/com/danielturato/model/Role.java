@@ -1,9 +1,6 @@
 package com.danielturato.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
@@ -12,7 +9,8 @@ import java.util.Objects;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "roleSeq")
+    @SequenceGenerator(name = "roleSeq", sequenceName = "role_seq", allocationSize = 1)
     private Long id;
 
     @NotEmpty
