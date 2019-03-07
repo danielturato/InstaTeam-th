@@ -1,9 +1,13 @@
 package com.danielturato.model;
 
+import org.springframework.context.annotation.PropertySource;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
+@PropertySource("messages.properties")
 public class Collaborator {
 
     @Id
@@ -11,6 +15,7 @@ public class Collaborator {
     private Long id;
 
     @NotNull
+    @Size(min = 3, max = 20, message = "{collaborator.name.size}")
     private String name;
 
     @ManyToOne

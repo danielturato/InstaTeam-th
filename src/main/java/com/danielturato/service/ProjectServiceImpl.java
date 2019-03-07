@@ -1,10 +1,13 @@
 package com.danielturato.service;
 
 import com.danielturato.dao.ProjectDaoImpl;
+import com.danielturato.model.Collaborator;
 import com.danielturato.model.Project;
+import com.danielturato.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -32,4 +35,5 @@ public class ProjectServiceImpl implements ProjectService {
     public void delete(Project p) {
         projectDao.delete(p);
     }
+
 }

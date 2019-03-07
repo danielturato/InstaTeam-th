@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="base :: head('collaborator_edit')"></head>
+    <body>
+        <header th:replace="base :: header"></header>
+        <nav>
+            <ul>
+                <li><a th:href="@{/projects}">Projects</a></li>
+                <li class="selected"><a th:href="@{/collaborators}">Collaborators</a></li>
+                <li><a th:href="@{/roles}">Roles</a></li>
+            </ul>
+        </nav>
+        <section>
+            <div class="container wrapper">
+                <form th:action="@{${action}}" method="post" th:object="${collaborator}">
+                    <input type="hidden" th:field="*{id}">
+                    <div class="edit-input" th:classappend="${#fields.hasErrors('name')}? 'edit-error' : ''">
+                        <label>Collaborator Name:</label>
+                        <input type="text" th:field="*{name}">
+                    </div>
+                    <div th:class="${#fields.hasErrors('name')}? 'error' : ''">
+                        <div th:class="${#fields.hasErrors('name')}? 'error' : ''">
+                            <div class="testtwo error-message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                        </div>
+                    </div>
+                    <label class="" th:classappend="${#fields.hasErrors('name')}? 'l-edit' : ''">Role:</label>
+                    <div class="custom-select">
+                        <span class="dropdown-arrow"></span>
+                        <select th:field="*{role.id}">
+                            <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
+                        </select>
+                    </div>
+                    <div class="actions">
+                        <button class="button" type="submit" value="Submit">Save</button>
+                        <a th:href="@{|/collaborators/*{id}|}" class="button button-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="base :: head('role_edit')"></head>
+    <body>
+        <header th:replace="base :: header"></header>
+        <nav>
+            <ul>
+                <li><a th:href="@{projects}">Projects</a></li>
+                <li><a th:href="@{collaborators}">Collaborators</a></li>
+                <li class="selected"><a th:href="@{/roles}">Roles</a></li>
+            </ul>
+        </nav>
+        <section>
+            <div class="container wrapper">
+                <form th:action="@{${action}}" method="post" th:object="${role}">
+                    <input type="hidden" th:field="*{id}">
+                    <div class="edit-input" th:classappend="${#fields.hasErrors('name')}? 'edit-error' : ''">
+                        <label> Role Name:</label>
+                        <input type="text" th:field="*{name}">
+                    </div>
+                    <div th:class="${#fields.hasErrors('name')}? 'error' : ''">
+                        <div class="testtwo error-message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                    </div>
+                    <div class="actions">
+                        <button class="button" type="submit" value="Submit">Save</button>
+                        <a th:href="@{|/roles/*{id}|}" class="button button-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </body>
+</html>
+
+

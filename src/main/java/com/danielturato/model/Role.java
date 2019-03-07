@@ -1,11 +1,15 @@
 package com.danielturato.model;
 
+import org.springframework.context.annotation.PropertySource;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
+@PropertySource("messages.properties")
 public class Role {
 
     @Id
@@ -14,6 +18,7 @@ public class Role {
     private Long id;
 
     @NotEmpty
+    @Size(min = 3, max = 12, message = "{role.name.size}")
     private String name;
 
     public Role() {}

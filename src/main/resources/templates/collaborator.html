@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="base :: head('collaborator')"></head>
+    <body>
+        <header th:replace="base :: header"></header>
+        <nav>
+            <ul>
+                <li><a th:href="@{/projects}">Projects</a></li>
+                <li class="selected"><a th:href="@{/collaborators}">Collaborators</a></li>
+                <li><a th:href="@{/roles}">Roles</a></li>
+            </ul>
+        </nav>
+        <section>
+            <div class="container wrapper">
+                <form>
+                    <h2 th:text="${collaborator.name + ' - (' + collaborator.role.name} + ')'"></h2>
+                    <div class="actions">
+                        <a th:href="@{|/collaborators/${collaborator.id}/edit|}" class="button">Edit</a>
+                        <a th:href="@{/collaborators}" class="button button-secondary">Go Back</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </body>
+</html>

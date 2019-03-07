@@ -1,5 +1,8 @@
 package com.danielturato.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -22,9 +25,11 @@ public class Project {
     private String status;
 
     @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Role> rolesNeeded = new ArrayList<>();
 
     @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Collaborator> collaborators = new ArrayList<>();
 
     public Project() {}
@@ -72,5 +77,6 @@ public class Project {
     public List<Collaborator> getCollaborators() {
         return collaborators;
     }
+
 
 }
