@@ -100,7 +100,7 @@ public class ProjectController {
 
         if (result.hasErrors()) {
             result.getAllErrors().forEach(System.out::println);
-            return String.format("redirect:/projects/{id}/collaborators", project.getId());
+            return String.format("redirect:/projects/%s/collaborators", project.getId());
         }
 
         projectService.save(project);
