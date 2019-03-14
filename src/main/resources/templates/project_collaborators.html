@@ -16,26 +16,29 @@
                     <input type="hidden" th:field="*{desc}">
                     <input type="hidden" th:field="*{status}">
                     <input type="hidden" th:field="*{name}">
-                    <select th:field="*{rolesNeeded}" style="display: none;">
-                        <option th:each="r : *{rolesNeeded}" th:value="${r.id}"></option>
-                    </select>
+                    <li th:each="role : *{rolesNeeded}" style="display: none">
+                        <input type="checkbox" th:field="*{rolesNeeded}" th:value="${role.id}" checked>
+                    </li>
+                    <div th:replace="base :: flash"></div>
                     <label th:text="${'Edit Collaborators: ' + project.name}">Edit Collaborators: Website Project</label>
                     <ul class="checkbox-list">
                         <li th:each="element : ${roleToC}"><span class="primary" th:text="${element.key.name}">Developer</span>
                             <div class="custom-select">
                                 <span class="dropdown-arrow"></span>
                                 <select th:field="*{collaborators}">
-                                    <option th:each="c : ${allCollaborators}" th:if="${#strings.equals(c.role.name, element.key.name)}" th:value="${c.id}" th:text="${c.name}" >Michael Pemulis</option>
+                                    <option th:each="c : *{collaborators}" th:if="${#strings.equals(c.role, element.key)}" th:value="${c.id}" th:text="${c.name}" selected></option>
+                                    <option th:each="c : ${availableCollaborators}" th:if="${#strings.equals(c.role, element.key)}" th:value="${c.id}" th:text="${c.name}" >Michael Pemulis</option>
                                 </select>
                             </div>
                         </li>
                     </ul>
                     <div class="actions">
                         <input type="submit" value="Save" class="button">
-                        <a th:href="@{/projects}" class="button button-secondary">Cancel</a>
+                        <a th:href="@{${back}}" class="button button-secondary">Back</a>
                     </div>
                 </form>
             </div>
         </section>
     </body>
 </html>
+

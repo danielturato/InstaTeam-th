@@ -2,13 +2,17 @@ package com.danielturato.model;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.context.annotation.PropertySource;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
+@PropertySource("messages.properties")
 public class Project {
 
     @Id
@@ -16,13 +20,18 @@ public class Project {
     private Long id;
 
     @NotNull
+    @Size(min = 3, max = 20, message = "{project.name.size}")
     private String name;
 
     @NotNull
+    @Size(min = 3, max = 50, message = "{project.desc.size}")
     private String desc;
 
     @NotNull
     private String status;
+
+    @Temporal(TemporalType.DATE)
+    private Date date = new Date();
 
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -78,5 +87,15 @@ public class Project {
         return collaborators;
     }
 
+    public void setCollaborators(List<Collaborator> collaborators) {
+        this.collaborators = collaborators;
+    }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }

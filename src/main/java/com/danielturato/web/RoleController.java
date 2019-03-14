@@ -1,6 +1,10 @@
 package com.danielturato.web;
 
+import com.danielturato.model.Collaborator;
+import com.danielturato.model.Project;
 import com.danielturato.model.Role;
+import com.danielturato.service.CollaboratorServiceImpl;
+import com.danielturato.service.ProjectServiceImpl;
 import com.danielturato.service.RoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +23,12 @@ public class RoleController {
 
     @Autowired
     private RoleServiceImpl roleService;
+
+    @Autowired
+    private CollaboratorServiceImpl collaboratorService;
+
+    @Autowired
+    private ProjectServiceImpl projectService;
 
     @RequestMapping("/roles")
     public String viewAllRoles(ModelMap model) {
@@ -87,6 +97,37 @@ public class RoleController {
         model.put("action", String.format("/roles/%s", roleId));
 
         return "role_edit";
+    }
+
+    @RequestMapping("/roles/{id}/delete")
+    public String deleteRole(@PathVariable Long id, ModelMap model) {
+        Role r = roleService.findById(id);
+        model.put("page", "role");
+        model.put("name", r.getName());
+        model.put("action", String.format("/roles/%s/delete", id));
+        model.put("back", String.format("/roles/%s", id));
+
+        return "delete_page";
+    }
+
+    @RequestMapping(value = "/roles/{id}/delete", method = RequestMethod.POST)
+    public String removeRole(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        Role r = roleService.findById(id);
+        for (Collaborator c : collaboratorService.findAll()) {
+            if (c.getRole() != null) {
+                if (c.getRole().getId().equals(id)) {
+                    for (Project p : projectService.findAll()) {
+                        projectService.removeCollaboratorFromProject(c, p);
+                        projectService.removeRoleFromProject(r, p);
+                    }
+                    c.setRole(null);
+                    collaboratorService.save(c);
+                }
+            }
+        }
+        roleService.delete(r);
+
+        return "redirect:/roles";
     }
 
 }

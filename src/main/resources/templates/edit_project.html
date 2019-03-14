@@ -12,14 +12,21 @@
         </nav>
         <section>
             <div class="container wrapper">
-                <form th:action="@{/projects}" method="post" th:object="${project}">
-                    <div>
+                <form th:action="@{${action}}" method="post" th:object="${project}">
+                    <li th:each="c : *{collaborators}" style="display:none;">
+                        <select th:field="*{collaborators}">
+                            <option th:value="${c.id}" selected></option>
+                        </select>
+                    </li>
+                    <div class="edit-input" th:classappend="${#fields.hasErrors('name')}? 'error testtwo' : ''">
                         <label> Project Name:</label>
                         <input type="text" th:field="*{name}">
+                        <div class="error-message test testwo" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
                     </div>
-                    <div>
+                    <div class="edit-input" th:classappend="${#fields.hasErrors('name')}? 'error testtwo' : ''">
                         <label>Project Description:</label>
                         <textarea rows="4" th:field="*{desc}"></textarea>
+                        <div class="testwo error-message test" th:if="${#fields.hasErrors('desc')}" th:errors="*{desc}"></div>
                     </div>
                     <div>
                         <label>Project Status:</label>
@@ -43,7 +50,7 @@
                     </div>
                     <div class="actions">
                         <input type="submit" value="Save" class="button">
-                        <a th:href="@{/projects}" class="button button-secondary">Cancel</a>
+                        <a th:href="@{${cancel}}" class="button button-secondary">Cancel</a>
                     </div>
                 </form>
             </div>

@@ -5,8 +5,8 @@
         <header th:replace="base :: header"></header>
         <nav>
             <ul>
-                <li><a th:href="@{projects}">Projects</a></li>
-                <li><a th:href="@{collaborators}">Collaborators</a></li>
+                <li><a th:href="@{/projects}">Projects</a></li>
+                <li><a th:href="@{/collaborators}">Collaborators</a></li>
                 <li class="selected"><a th:href="@{/roles}">Roles</a></li>
             </ul>
         </nav>
@@ -17,6 +17,7 @@
                     <div class="actions">
                         <a th:href="@{|/roles/${role.id}/edit|}" class="button">Edit</a>
                         <a th:href="@{/roles}" class="button button-secondary">Go Back</a>
+                        <a class="delete button button-secondary" th:href="@{|/roles/${role.id}/delete|}">Delete Collaborator</a>
                     </div>
                 </form>
             </div>

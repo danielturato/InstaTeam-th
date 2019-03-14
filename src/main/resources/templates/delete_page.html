@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="base :: head('delete_page')"></head>
+    <body>
+        <header th:replace="base :: header"></header>
+        <nav>
+            <ul>
+                <li th:classappend="${#strings.equals('project', page)} ? 'selected' : ''"><a th:href="@{/projects}">Projects</a></li>
+                <li th:classappend="${#strings.equals('collaborator', page)} ? 'selected' : ''"><a th:href="@{/collaborators}">Collaborators</a></li>
+                <li th:classappend="${#strings.equals('role', page)} ? 'selected' : ''"><a th:href="@{/roles}">Roles</a></li>
+            </ul>
+        </nav>
+        <section>
+            <div class="container wrapper">
+                <form th:action="${action}" method="post">
+                    <h2 th:text="${'Are you sure you want to delete ' + name + '?'}"></h2>
+                    <div class="actions">
+                        <input type="submit" value="Delete" class="button">
+                        <a th:href="@{${back}}" class="button button-secondary">Back</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </body>
+</html>

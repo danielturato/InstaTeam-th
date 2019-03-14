@@ -13,10 +13,11 @@
         <section>
             <div class="container wrapper">
                 <form>
-                    <h2 th:text="${collaborator.name + ' - (' + collaborator.role.name} + ')'"></h2>
+                    <h2 th:text="${collaborator.name + ' - (' + role + ')'}"></h2>
                     <div class="actions">
                         <a th:href="@{|/collaborators/${collaborator.id}/edit|}" class="button">Edit</a>
                         <a th:href="@{/collaborators}" class="button button-secondary">Go Back</a>
+                        <a class="delete button button-secondary" th:href="@{|/collaborators/${collaborator.id}/delete|}">Delete Collaborator</a>
                     </div>
                 </form>
             </div>

@@ -12,10 +12,12 @@
         </nav>
         <section>
             <div class="container wrapper">
+                <div th:replace="base :: flash"></div>
                 <div class="project-list">
                     <div th:each="project : ${projects}" class="project">
                         <h2><a th:href="@{|/projects/${project.id}|}" th:text="${project.name}">Website Project</a></h2>
                         <p th:text="${project.desc}">Design and build a custom website</p>
+                        <p th:text="${#dates.format(project.date, 'dd-MMM-yyyy')}"></p>
                         <span class="tag active" th:classappend="${#strings.equals(project.status, 'active')}? 'active' : 'archived'" th:text="${project.status}">Active</span>
                     </div>
                 </div>

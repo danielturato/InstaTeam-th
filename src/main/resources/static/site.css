@@ -435,13 +435,22 @@ form .add-new-collaborator .button {
 	border-color: #ac4343;
 }
 
+.edit-error textarea {
+	width: 530px
+}
+
+
 .test {
 	margin-top: -13px;
 }
 
 .testtwo{
-	width: 604px;
+	width: 630px;
 	margin-bottom: 35px;
+}
+
+.p-error {
+	width: 604px;
 }
 
 .error .error-message {
@@ -515,6 +524,7 @@ form .add-new-collaborator .button {
 .l-edit {
 	margin-top: 80px;
 }
+
 
 
 

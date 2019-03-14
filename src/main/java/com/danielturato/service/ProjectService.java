@@ -11,4 +11,6 @@ public interface ProjectService {
     Project findById(Long id);
     void save(Project p);
     void delete(Project p);
+    void removeCollaboratorFromProject(Collaborator c, Project p);
+    void removeRoleFromProject(Role r, Project p);
 }
